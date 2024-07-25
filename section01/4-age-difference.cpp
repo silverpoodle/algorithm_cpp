@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 using namespace std;
 
 /* 4. N(2<=N<=100)명의 나이가 입력되면 이 중 나이차이가 가장 많이 나는 경우는 몇 살인지 구하시오 */
