@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<stack>
 
 using namespace std;
 
@@ -7,16 +8,28 @@ using namespace std;
 int main() {
 
     string input, output="";
+    stack<char> s;
 
     cin >> input;
 
     for(char c : input) {
-        if(c != ' ') {
-            output += tolower(c);
+        if(c == '(') {
+            s.push(c);
+        } else if (c == ')') {
+            if(s.empty()) {
+                cout << "NO" << endl;
+                return 0;
+            }
+             else 
+                s.pop();
         }
     }
 
-    cout << output << endl;
+    if(s.empty()) {
+        cout << "YES" << endl;
+    } else {
+        cout << "NO" << endl;
+    }
 
     return 0;
 }
