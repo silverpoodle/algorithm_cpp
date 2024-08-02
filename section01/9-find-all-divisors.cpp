@@ -1,4 +1,5 @@
 #include<iostream>
+#include <list>
 
 using namespace std;
 
@@ -6,14 +7,12 @@ using namespace std;
 /* 시간 제한 1초 */
 int main() {
 
-    int n;
+    int n, cnt = 0;
+    list<int> cntList;
+
     cin >> n;
 
     
-
-    for(int i = 1 ; i <= n ; i++) {
-
-    }
     
     return 0;
 }
