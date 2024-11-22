@@ -6,16 +6,16 @@ using namespace std;
        예를 들어 11는 1,2,3,4,5,6,7,8,9,1,0,1,1 총 13개
        (3 <= N <= 100,000) */
 
+       //N=1,000,000,000: time: 2
+
 int main() {
     int n, cnt = 0;
 
     cin >> n;
 
-    // for(int i = 1 ; i <= n ; i++) {
-    //     cnt += i/10 + 1;
-    // }
-
-    
+    for(int i = 1 ; i <= n ; i++) {
+        cnt += i/10 + 1;
+    }
 
     cout << cnt << endl;
 
