@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include <time.h>
 
 using namespace std;
@@ -15,7 +16,8 @@ int main() {
     char a[101];
     int cnt[10] = {0};
 
-    cin >> n;
+    int max = 0;
+    int res;
 
     time_t start = time(NULL);
 
@@ -34,6 +36,27 @@ int main() {
     //     }
     // }
     // cout << res << endl;
+
+    cin >> a;
+
+    for (int i = 0 ; i < strlen(a) ; i++) {
+        cnt[a[i] - '0']++;
+    }
+
+    // '0' - '0' = 48 - 48 = 0
+    // '1' - '0' = 49 - 48 = 1
+    // '2' - '0' = 50 - 48 = 2
+    // '3' - '0' = 51 - 48 = 3
+
+    for(int i= 0 ; i < 10 ; i++) {
+        if(cnt[i] >= max) {
+            max = cnt[i];
+            res = i;
+        }
+    }
+
+    cout << res << endl;
+
 
     time_t end = time(NULL);
 
