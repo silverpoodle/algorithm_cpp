@@ -65,8 +65,8 @@ void solve() {
     // (1 << k) 는 2^k를 계산하는 비트 연산
     for(int state = 0; state < (1 << (N * M)); state++) {
         vector<vector<bool>> pieces(N, vector<bool>(M));
-        
-        for(int i = 0; i < N; i++) {
+
+        for(int i = 0; i < N; i++) { 
             for(int j = 0; j < M; j++) {
                 // bit 가 1인자 확인
                 if(state & (1 << (i * M + j))) {
