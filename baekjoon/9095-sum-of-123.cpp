@@ -23,18 +23,26 @@ using namespace std;
 */
 
 int main() {
-    int N;
-    cin >> N;
+    int T;
+    int arr[11];
+    int maxNum = 0;
 
-    vector<int> dp(N);
+    cin >> T;
+
+    for(int i = 0 ; i < T ; i++) {
+        cin >> arr[i];
+        maxNum = max(arr[i], maxNum);
+    }
+
+    vector<int> dp(maxNum);
 
     dp[0] = 1;
     dp[1] = 2;
+    dp[2] = 4;
 
-    for(int i = 2 ; i < N ; i++) {
-        dp[i] = (dp[i-1] + dp[i-2]) % 10007;
+    for(int i = 3 ; i < maxNum ; i++) {
+        dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
     }
 
-    cout << dp[N-1];
-   
+    for(int i = 0 ; i < T ; i++) cout << dp[arr[i]-1] << "\n";
 }
