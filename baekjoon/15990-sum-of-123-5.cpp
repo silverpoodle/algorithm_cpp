@@ -20,36 +20,40 @@ using namespace std;
     각 테스트 케이스마다, n을 1, 2, 3의 합으로 나타내는 방법의 수를 1,000,000,009로 나눈 나머지를 출력한다.
 */
 
+const int MOD = 1000000009;
+
 int main() {
+
+
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
 
     int T;
     cin >> T;
 
-    vector<int> cases(T + 1, 0);
+    vector<int> cases(T, 0);
     int maxNum = 0;
 
-    for(int i = 1 ; i <= T ; i++) {
+    for(int i = 0 ; i < T ; ++i) {
         cin >> cases[i];
         maxNum = max(maxNum, cases[i]);
     }
 
-    vector<int> dp(maxNum + 1, 0);
-    vector<vector<int>> dpCnt(maxNum + 1, vector<int>(4, 0));
+    vector<vector<int>> dp(maxNum + 1, vector<int>(4, 0));
 
-    dp[1] = 1;
-    dp[2] = 1;
-    dp[3] = 3;
+    dp[1][1] = 1; 
+    dp[2][2] = 1; 
+    dp[3][1] = 1; dp[3][2] = 1; dp[3][3] = 1; 
 
-    dpCnt[1][1] = 1; 
-    dpCnt[2][2] = 1; 
-    dpCnt[3][1] = 1; dpCnt[3][2] = 1; dpCnt[3][3] = 1; 
-
-    for (int i = 4 ; i <= maxNum ; i++) {
-        for(int j = 1 ; j < 4 ; j++) {
-            dp[i] += dp[i-j] - dpCnt[i-j][j];
-            dpCnt[i][j] = dp[i-j] - dpCnt[i-j][j];
-        }
+    for (int i = 4 ; i <= maxNum ; ++i) {
+        dp[i][1] = (dp[i-1][2] + dp[i-1][3]) % MOD;
+        dp[i][2] = (dp[i-2][1] + dp[i-2][3]) % MOD;
+        dp[i][3] = (dp[i-3][1] + dp[i-3][2]) % MOD;
     }
 
-    for(int i = 1 ; i <= T ; i++) cout << dp[cases[i]] % 1000000009  << "\n";
+    for (int i = 0; i < T; ++i) {
+        int n = cases[i];
+        int result = (dp[n][1] + dp[n][2] + dp[n][3]) % MOD;
+        cout << result << "\n";
+    }
 }
