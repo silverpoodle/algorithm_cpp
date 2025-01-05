@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 using namespace std;
+typedef long long ll;
 
 /*
 정수 4를 1, 2, 3의 합으로 나타내는 방법은 총 7가지가 있다. 합을 나타낼 때는 수를 1개 이상 사용해야 한다.
@@ -19,6 +20,9 @@ using namespace std;
 - 출력
     각 테스트 케이스마다, n을 1, 2, 3의 합으로 나타내는 방법의 수를 1,000,000,009로 나눈 나머지를 출력한다.
 */
+
+/* 틀린이유: overflow 고려할것....
+1000000009*3 = int(21억) 넘음*/
 
 const int MOD = 1000000009;
 
@@ -53,7 +57,7 @@ int main() {
 
     for (int i = 0; i < T; ++i) {
         int n = cases[i];
-        int result = (dp[n][1] + dp[n][2] + dp[n][3]) % MOD;
+        ll result = ((ll)dp[n][1] + dp[n][2] + dp[n][3]) % MOD;
         cout << result << "\n";
     }
 }
