@@ -19,7 +19,6 @@ int main() {
     int N;
     cin >> N;
 
-    int cnt = 1;
     int sub[1000];
     for(int i = 0 ; i < N ; i++) cin >> sub[i];
      int max = sub[0];
