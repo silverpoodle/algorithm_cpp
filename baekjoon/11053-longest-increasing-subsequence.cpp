@@ -1,4 +1,5 @@
 #include<iostream>
+#include<vector>
 using namespace std;
 
 /*
@@ -16,21 +17,32 @@ A = {10*, 20*, 10, 30*, 20, 50*} 이고, 길이는 4이다.
 */
 
 int main() {
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+
     int N;
     cin >> N;
 
-    int sub[1000];
-    for(int i = 0 ; i < N ; i++) cin >> sub[i];
-     int max = sub[0];
+    vector<int> arr(N);
+    for (int i = 0 ; i < N ; i++) cin >> arr[i];
 
-    for(int i = 1 ; i < N ; i++) {
-        if(sub[i] > max) {
-            max = sub[i];
-            cnt++;
+    vector<int> dp(N);
+
+    dp[0] = 1;
+    int max_num = 1;
+
+    for(int i = 1; i < N ; i++) {
+        dp[i] = 1;
+        for(int j = 0 ; j < i ; j++) {
+            if(arr[i] > arr[j]) {
+                dp[i] = max(dp[i], dp[j] + 1);
+            }
         }
+        max_num = max(dp[i], max_num);
     }
 
-    cout << cnt;
+    cout << max_num;
 
     return 0;
 }
