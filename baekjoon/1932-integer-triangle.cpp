@@ -47,9 +47,9 @@ int main() {
      for (int i = 1; i < N; i++) {
         for (int j = 0; j <= i; j++) {
             if (j == 0) {
-                dp[i][j] = dp[i - 1][j] + arr[i][j]; // From top directly
+                dp[i][j] = dp[i - 1][j] + arr[i][j]; // 왼쪽
             } else if (j == i) {
-                dp[i][j] = dp[i - 1][j - 1] + arr[i][j]; // From the diagonal left
+                dp[i][j] = dp[i - 1][j - 1] + arr[i][j]; //오른쪽
             } else {
                 dp[i][j] = max(dp[i - 1][j - 1], dp[i - 1][j]) + arr[i][j];
             }
