@@ -34,7 +34,7 @@ int main() {
     vector<int> remove(N, 0);
 
     no_remove[0] = arr[0];
-    remove[0] = 0;
+    remove[0] = arr[0];
 
     int max_sum = arr[0];
     for(int i = 1 ; i < N ; i++) {
