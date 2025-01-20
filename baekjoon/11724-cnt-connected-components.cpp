@@ -35,9 +35,6 @@ void check_graph(int start) {
     queue<int> Q;
     Q.push(start);
     visited[start] = true;
-    
-    Q.push(start);
-    visited[start] = true;
 
     while(!Q.empty()) {
         int node = Q.front();
@@ -50,9 +47,6 @@ void check_graph(int start) {
             }
         }
     }
-
-
-
 }
 
 int main() {
