@@ -1,6 +1,6 @@
 #include<iostream>
 #include<vector>
-#include<queue>
+#include<algorithm>
 using namespace std;
 
 /*
@@ -35,18 +35,65 @@ using namespace std;
     9
 */
 
+bool map[30][30];
+bool visited[30][30] = {false};
+int total = 0;
+int cnt = 0;
+
+
+int dirX[4] = {1, -1, 0, 0};
+int dirY[4] = {0, 0, 1, -1};
+
+int newX = 0; 
+int newY = 0;
+
+vector<int> cnt_vector;
+
+void dfs(int x, int y) {
+
+    visited[x][y] = true;
+    cnt++;
+
+    for(int i = 0 ; i < 4 ; i++) {
+        newX = x + dirX[i];
+        newY = y + dirY[i];
+
+        if(map[newX][newY] && !visited[newX][newY]) {
+            dfs(newX, newY);
+        }
+    }
+}
+
 int main() {
+
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
 
     int N; 
     cin >> N;
 
-    vector<vector<int>> arr(N + 1);
-
     for(int i = 1 ; i <= N ; i++) {
-        for(int j = 1 ; j <= N ; j++) cin >> arr[i][j];
+        string s;
+        cin >> s;
+        for(int j = 1 ; j <= N ; j++) {
+            map[i][j] = s.at(j-1) == '1';
+        }
     }
 
-
-
-
+    for(int i = 1; i <= N ; i++) {
+        for(int j = 1 ; j <= N ; j++) {
+            if(map[i][j] && !visited[i][j]){
+                cnt = 0;
+                dfs(i, j);
+                cnt_vector.push_back(cnt);
+                total ++;
+            }
+        }
+    }
+    cout << total << "\n";
+    sort(cnt_vector.begin(), cnt_vector.end());
+    for(int i = 0 ; i < cnt_vector.size() ; i++) {
+        cout << cnt_vector[i] << "\n";
+    }
+    return 0;
 }
