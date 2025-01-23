@@ -1,6 +1,6 @@
 #include<iostream>
-#include<vector>
-#include<algorithm>
+#include<queue>
+#include<utility>
 using namespace std;
 
 /*
@@ -27,31 +27,51 @@ N×M크기의 배열로 표현되는 미로가 있다.
 
 int N, M;
 bool maze[110][110] = {false};
-bool visited[110][110] = {false};
-int cnt = 1;
-int min_cnt = 10000;
+int dist[110][110] = {0};
 
 int dirX[4] = {1, -1, 0, 0};
 int dirY[4] = {0, 0, 1, -1};
 
-void dfs(int x, int y) {
-    visited[x][y] = true;
+// void dfs(int x, int y) {
+//     visited[x][y] = true;
 
-    if(x == N && y == M) {
-        min_cnt = min(min_cnt, cnt);
-        return;
-    }
+//     if(x == N && y == M) {
+//         min_cnt = min(min_cnt, cnt);
+//         return;
+//     }
 
-    for(int i = 0 ; i < 4 ; i++) {
-        int newX = x + dirX[i];
-        int newY = y + dirY[i];
-        if(maze[newX][newY] && !visited[newX][newY]) {
-            cnt++;
-            dfs(newX, newY);
-            cnt--;
+//     for(int i = 0 ; i < 4 ; i++) {
+//         int newX = x + dirX[i];
+//         int newY = y + dirY[i];
+//         if(maze[newX][newY] && !visited[newX][newY]) {
+//             cnt++;
+//             dfs(newX, newY);
+//             cnt--;
+//         }
+//     }
+//     visited[x][y] = false; 
+// }
+
+void bfs() {
+    queue<pair<int, int>> Q;
+    Q.push({1,1});
+    dist[1][1] = 1;
+
+    while(!Q.empty()) {
+        int x = Q.front().first;
+        int y = Q.front().second;
+        Q.pop();
+
+        for(int i = 0 ; i < 4 ; i++) {
+            int newX = x + dirX[i];
+            int newY = y + dirY[i];
+
+            if(maze[newX][newY] && dist[newX][newY] == 0) {
+                dist[newX][newY] = dist[x][y] + 1;
+                Q.push({newX, newY});
+            }
         }
     }
-    visited[x][y] = false; 
 }
 
 int main() {
@@ -69,8 +89,8 @@ int main() {
         }
      }
 
-    dfs(1, 1);
-    cout << min_cnt;
+    bfs();
+    cout << dist[N][M];
 
     return 0;
 }
