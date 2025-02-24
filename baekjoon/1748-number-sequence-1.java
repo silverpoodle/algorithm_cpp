@@ -17,11 +17,17 @@ import java.io.*;
 class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
         int N = Integer.parseInt(br.readLine());
 
-        
+        long ans = 0;
+        int length = String.valueOf(N).length();
 
+        for(int i = 1 ; i < length ; i++) {
+            ans += i * (9 * Math.pow(10, i-1));
+        }
+        ans += length * (N - Math.pow(10, length -1) + 1);
+
+        System.out.println(ans);
     }
 
 }
